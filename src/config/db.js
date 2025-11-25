@@ -1,20 +1,13 @@
-import express from "express";
-import dotenv from "dotenv";
-import { sql } from "./config/db.js";
-import transactionRoute from "./routes/transactionRoute.js";
+import {neon} from "@neondatabase/serverless";
 
-//config
-dotenv.config();
-const PORT = process.env.PORT;
-
-const app = express();
+import "dotenv/config";
 
 
-// middleware  
-app.use(express.json());
+//Creates a sql connection using our db url
+export const sql = neon(process.env.DATABASE_URL);
 
 
-async function initDb() {
+export async function initDb() {
   try {
     await sql`CREATE TABLE IF NOT EXISTS transactions(
         id SERIAL PRIMARY KEY,
@@ -30,17 +23,3 @@ async function initDb() {
     process.exit(1); // status code 1 means failure, 0 means success
   }
 }
-
-
-//routes
-app.use("/api", transactionRoute);
-
-
-
-
-
-initDb().then(() => {
-  app.listen(PORT, () => {
-    console.log("Server is up and running...", PORT);
-  });
-});
