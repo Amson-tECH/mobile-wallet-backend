@@ -7,6 +7,14 @@ const PORT = process.env.PORT;
 
 const app = express();
 
+async function initDb() {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
 
 //routes
 app.get("/home", (req, res) => {
