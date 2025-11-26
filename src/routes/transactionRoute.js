@@ -3,6 +3,7 @@ import { sql } from "../config/db.js";
 
 const transactionRoute = express.Router();
 
+// creating a transaction
 transactionRoute.post("/transactions", async (req, res) => {
   try {
     const { title, amount, category, user_id } = req.body;
@@ -24,6 +25,7 @@ transactionRoute.post("/transactions", async (req, res) => {
   }
 });
 
+// getting a transaction
 transactionRoute.get("/transactions/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
@@ -39,6 +41,7 @@ transactionRoute.get("/transactions/:userId", async (req, res) => {
   }
 });
 
+// deleting a transaction
 transactionRoute.delete("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -61,6 +64,7 @@ transactionRoute.delete("/transactions/:id", async (req, res) => {
   }
 });
 
+// getting the summary
 transactionRoute.get("/transactions/summary/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
