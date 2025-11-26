@@ -4,7 +4,7 @@ const rateLimiter = async (req, res, next) => {
   try {
     // here kept it simple
     // real world app: for production put the userid or ipAddress as the key
-    const { success } = await ratelimite.limit("my-rate-limit");
+    const { success } = await ratelimite.limit(`${req.ip}`);
 
     if (!success) {
       return res
